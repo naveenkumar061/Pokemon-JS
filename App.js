@@ -5,6 +5,8 @@ const next = document.getElementById("next");
 const prev = document.getElementById("prev");
 const first = document.getElementById("first");
 const last = document.getElementById("last");
+const current = document.getElementById("current");
+const offsetElement = document.getElementById("offset");
 
 // Initial States
 prev.disabled = true;
@@ -16,8 +18,8 @@ const getData = async (offset, currentPage) => {
   );
   const data = await response.json();
   const container = document.getElementById("allPokemons");
-  const current = document.getElementById("current");
   current.innerHTML = `${currentPage}`;
+  offsetElement.innerHTML = `${offset}`;
   container.innerHTML = "";
   return data.results.map((item, index) => {
     const getIndividualData = async () => {
@@ -30,11 +32,13 @@ const getData = async (offset, currentPage) => {
         type: data.types[0].type.name,
       };
       const specificContainer = document.createElement("div");
+      specificContainer.classList.add(`${obj.type}`);
+      specificContainer.classList.add("specific");
       specificContainer.innerHTML = `
       <img src=${obj.img} alt=${item.name} />
       <h1>${item.name}</h1>
       <p>type: ${obj.type}</p>
-      <button onclick="popUp()" id=${item.name} data=${item.name}>know more</button>
+      <button onclick="popUp()" id=${item.name} data=${item.name} class=${obj.type}>know more</button>
         `;
       container.appendChild(specificContainer);
     };
@@ -60,7 +64,7 @@ next.addEventListener("click", () => {
   offset += 20;
   currentPage += 1;
   getData(offset, currentPage);
-  if (offset === 1280) {
+  if (offset === 600) {
     prev.disabled = false;
     next.disabled = true;
   } else {
@@ -82,10 +86,10 @@ first.addEventListener("click", () => {
   }
 });
 last.addEventListener("click", () => {
-  offset = 1280;
-  currentPage = 65;
+  offset = 600;
+  currentPage = 31;
   getData(offset, currentPage);
-  if (offset === 1280) {
+  if (offset === 600) {
     prev.disabled = false;
     next.disabled = true;
   } else {
@@ -129,18 +133,21 @@ function displayIndividualInfo(obj) {
   const container = document.getElementById("allPokemons");
   const load = document.getElementById("load");
   load.classList.add("hide-btns");
+  // container.classList.add("subPokemons");
   container.innerHTML = `
   <div class="main-div">
-    <button class="close" onclick="displayInitial()">X</button>
-    <div class="main-info">
+    <button class="${obj.type} close" onclick="displayInitial()">X</button>
+    <div class="main-info ${obj.type}">
       <div class="left">
         <img src=${obj.img} alt=${obj.name} />
-        <h1>${obj.name}</h1>
-        <p>type : ${obj.type}</p>
-        <p>height : ${obj.height}</p>
-        <p>weight : ${obj.weight}</p>
       </div>
       <div class="right">
+        <h1>${obj.name}</h1>
+        <div class="para">
+          <p>type : ${obj.type}</p>
+          <p>height : ${obj.height}</p>
+          <p>weight : ${obj.weight}</p>
+        </div>
         <div class="abilities">
           <p>ability1 : ${obj.abilities[0]}</p>
           <p>ability2 : ${obj.abilities[1]}</p>
@@ -160,7 +167,12 @@ function displayIndividualInfo(obj) {
 }
 
 function displayInitial() {
-  offset = 0;
-  currentPage = 1;
+  const load = document.getElementById("load");
+  load.classList.remove("hide-btns");
+  offset = offsetElement.innerHTML;
+  // console.log(offset);
+  currentPage = current.innerHTML;
+  prev.disabled = true;
+  next.disabled = false;
   getData(offset, currentPage);
 }

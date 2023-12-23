@@ -1,13 +1,342 @@
-@import url("https://fonts.googleapis.com/css2?family=Satisfy&display=swap");
+/* Importing Font */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+/* Global Variables */
+:root {
+  --font-family: "Poppins", sans-serif;
+  --white: #fff;
+  --black: #000;
+  --blue-shade: #03a9f4;
+  --linear-gradient: linear-gradient(
+    to right,
+    #f1e3f3 0%,
+    #c2bbf0 25%,
+    #8fb8ed 50%,
+    #62bfed 75%,
+    #3590f3 100%
+  );
+  --grass-lg: linear-gradient(
+    to top,
+    #c0ff3e 0%,
+    #ccff00 25%,
+    #adff2f 50%,
+    #b3ee3a 75%,
+    #7cfc00 100%
+  );
+  --bug-lg: linear-gradient(
+    to top,
+    #f6e1d2 0%,
+    #f4ceb4 25%,
+    #e7be95 50%,
+    #dfaf7e 75%,
+    #c58d5f 100%
+  );
+  --fire-lg: linear-gradient(
+    120deg,
+    #ff9a6e 0%,
+    #ffc57d 25%,
+    #ffdea0 50%,
+    #ffc284 75%,
+    #ff987d 100%
+  );
+  --water-lg: linear-gradient(
+    to top,
+    #00ffdf 0%,
+    #00d8bd 25%,
+    #00bda5 50%,
+    #009f8b 75%,
+    #007667 100%
+  );
+  --normal-lg: linear-gradient(to top, #e3fdf5 0%, #ffe6fa 100%);
+  --poison-lg: linear-gradient(to top, #df89b5 0%, #bfd9fe 100%);
+  --electric-lg: linear-gradient(to top, #f83600 0%, #f9d423 100%);
+  --ground-lg: linear-gradient(315deg, #772f1a 0%, #f2a65a 74%);
+  --rock-lg: linear-gradient(to top, #c79081 0%, #dfa579 100%);
+  --ghost-lg: linear-gradient(to top, #b7b7b8 0%, #e2ebf0 100%);
+  --fairy-lg: linear-gradient(to top, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+}
+
+/* Animations */
+@keyframes animate {
+  0%,
+  100% {
+    clip-path: polygon(
+      0% 45%,
+      16% 44%,
+      33% 50%,
+      54% 60%,
+      70% 61%,
+      84% 59%,
+      100% 52%,
+      100% 100%,
+      0% 100%
+    );
+  }
+  50% {
+    clip-path: polygon(
+      0% 60%,
+      15% 65%,
+      34% 66%,
+      51% 62%,
+      67% 50%,
+      84% 45%,
+      100% 46%,
+      100% 100%,
+      0% 100%
+    );
+  }
+}
 
 /* Global Styles */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: var(--font-family);
+}
+body {
+  background-image: var(--linear-gradient);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+  /* border: 2px solid black; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Types */
+.rock,
+.steel {
+  background-image: var(--rock-lg);
+}
+.ghost,
+.psychic {
+  background-image: var(--ghost-lg);
+}
+.dragon,
+.electric {
+  background-image: var(--electric-lg);
+}
+.bug {
+  background-image: var(--bug-lg);
+}
+.poison {
+  background-image: var(--poison-lg);
+}
+.normal,
+.dark {
+  background-image: var(--normal-lg);
+}
+.fairy {
+  background-image: var(--fairy-lg);
+}
+.fighting,
+.fire {
+  background-image: var(--fire-lg);
+}
+.grass {
+  background-image: var(--grass-lg);
+}
+.water,
+.ice {
+  background-image: var(--water-lg);
+}
+.ground {
+  background-image: var(--ground-lg);
 }
 
 /* Pagination */
+#offset {
+  display: none;
+}
+.load-more-btn {
+  padding: 2rem;
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  align-items: center;
+}
+.load-more-btn button {
+  text-transform: capitalize;
+  font-size: 1.5rem;
+  padding: 0 1rem;
+  border: 2px solid var(--white);
+  background-color: transparent;
+  cursor: pointer;
+  background-image: var(--normal-lg);
+  outline: none;
+  letter-spacing: 1px;
+}
+#current {
+  cursor: auto;
+}
+.load-more-btn button:hover {
+  border: 2px solid var(--blue-shade);
+  background: var(--water-lg);
+}
+#current:hover {
+  background-image: var(--normal-lg);
+  border: 2px solid var(--white);
+}
+/* Main Container */
+.main-container {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+}
+
+/* Heading Container */
+.heading-container {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  position: relative;
+  text-transform: uppercase;
+  font-size: 2rem;
+  width: 80vw;
+  height: 20vh;
+  align-self: center;
+}
+.content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  left: 15rem;
+}
+.content h1 {
+  position: absolute;
+  color: var(--white);
+}
+.content h1:nth-child(1) {
+  color: transparent;
+  -webkit-text-stroke: 2px var(--black);
+}
+.content h1:nth-child(2) {
+  color: var(--black);
+  animation: animate 2s ease-in-out infinite;
+}
+.content1 {
+  left: 4rem;
+}
+
+/* Info-Container */
+.info-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+}
+#allPokemons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  text-transform: capitalize;
+  gap: 1rem;
+  padding: 1rem;
+}
+img {
+  width: 200px;
+  height: 200px;
+}
+.specific {
+  border: 2px solid var(--blue-shade);
+  width: 22.5%;
+  height: 100%;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  border-radius: 5px;
+  min-height: 50vh;
+  font-size: 1.25rem;
+}
+.specific h1 {
+  padding: 0.75rem;
+  width: 100%;
+  height: 80px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.specific p {
+  font-weight: bold;
+}
+.specific button {
+  border: 2px solid var(--blue-shade);
+  text-transform: capitalize;
+  padding: 0.5rem;
+  font-weight: bold;
+  font-size: 1.25rem;
+  cursor: pointer;
+}
+.specific button:hover {
+  background-image: var(--linear-gradient);
+  border: 2px solid var(--white);
+}
+
+/* Individual Info Contaiiner */
+/* .main-div {
+  border: 2px solid var(--black);
+  display: flex;
+  flex-direction: row-reverse;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+} */
 .hide-btns {
   display: none;
+}
+.close {
+  position: relative;
+  border-radius: 50%;
+  border: 2px solid var(--blue-shade);
+  padding: 1rem;
+  font-size: 1rem;
+  font-weight: bold;
+  position: relative;
+  left: 28rem;
+  z-index: 1;
+}
+.close:hover {
+  background-image: var(--linear-gradient);
+  border: 2px solid var(--white);
+}
+.main-info {
+  display: flex;
+  width: 100%;
+  padding: 1rem 4.5rem 1rem 1rem;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  position: relative;
+  bottom: 4.5rem;
+}
+.right {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  gap: 2rem;
+  font-size: 1.25rem;
+}
+.abilities {
+  display: flex;
+  gap: 1rem;
+}
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+.para {
+  display: flex;
+  gap: 1rem;
 }
