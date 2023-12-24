@@ -7,6 +7,7 @@ const first = document.getElementById("first");
 const last = document.getElementById("last");
 const current = document.getElementById("current");
 const offsetElement = document.getElementById("offset");
+let typeAll = [];
 
 // Initial States
 prev.disabled = true;
@@ -29,18 +30,22 @@ const getData = async (offset, currentPage) => {
       const data = await response.json();
       const obj = {
         img: data.sprites.other.dream_world.front_default,
-        type: data.types[0].type.name,
+        type: data.types.map((item, index) => {
+          return item.type.name;
+        }),
       };
+      typeAll = [...typeAll, obj.type[0]];
       const specificContainer = document.createElement("div");
-      specificContainer.classList.add(`${obj.type}`);
+      specificContainer.classList.add(`${obj.type[0]}`);
       specificContainer.classList.add("specific");
       specificContainer.innerHTML = `
       <img src=${obj.img} alt=${item.name} />
-      <h1>${item.name}</h1>
-      <p>type: ${obj.type}</p>
-      <button onclick="popUp()" id=${item.name} data=${item.name} class=${obj.type}>know more</button>
-        `;
+      <h2>${item.name}</h2>
+      <p>type: ${obj.type[0]}</p>
+      <button onclick="popUp()" id=${item.name} data=${item.name} class=${obj.type[0]}>know more</button>
+      `;
       container.appendChild(specificContainer);
+      // console.log(typeAll);
     };
     getIndividualData();
   });
@@ -111,17 +116,23 @@ function popUp() {
     const obj = {
       name: name,
       img: data.sprites.other.dream_world.front_default,
-      type: data.types[0].type.name,
       abilities: data.abilities.map((item, index) => {
         return item.ability.name;
       }),
+      baseExperience: data.base_experience,
+      type: data.types.map((item, index) => {
+        return item.type.name;
+      }),
       height: data.height,
-      stats: data.stats.map((item, index) => {
+      bs: data.stats.map((item, index) => {
         return item.base_stat;
+      }),
+      stats: data.stats.map((item, index) => {
+        return item.stat.name;
       }),
       weight: data.weight,
     };
-    // console.log(obj.weight);
+    console.log(obj.type);
     displayIndividualInfo(obj);
   };
   getIndividualData();
@@ -129,50 +140,79 @@ function popUp() {
 
 // displayIndividualInfo(obj);
 function displayIndividualInfo(obj) {
-  console.log(obj);
-  const container = document.getElementById("allPokemons");
+  // console.log(obj);
+  const mainContainer = document.getElementById("allPokemons");
+  const headContainer = document.getElementById("heading");
+  const container = document.getElementById("subPokemon");
   const load = document.getElementById("load");
-  load.classList.add("hide-btns");
-  // container.classList.add("subPokemons");
+  headContainer.style.display = "none";
+  mainContainer.style.display = "none";
+  load.style.display = "none";
+  container.style.display = "flex";
+  container.classList.add(`${obj.type[0]}`);
+  container.classList.add(`individualPokemon`);
   container.innerHTML = `
-  <div class="main-div">
-    <button class="${obj.type} close" onclick="displayInitial()">X</button>
-    <div class="main-info ${obj.type}">
+    <button onclick="displayInitial()" id=${obj.type[0]} class=${
+    obj.type[0]
+  }>X</button>
+    <h2>${obj.name}</h2>
+    <img src=${obj.img} alt=${obj.name} />
+    <div class="info">
       <div class="left">
-        <img src=${obj.img} alt=${obj.name} />
+        <p class="baseExperience">Base Experience : ${obj.baseExperience}</p>
+        <p class="height">height : ${obj.height}</p>
+        <p class="weight">weight : ${obj.weight}</p>
+        <div>
+          ${obj.bs
+            .map((item, index) => {
+              return `<p>bs${index + 1} : ${item}`;
+            })
+            .join("")}
+        </div>
       </div>
       <div class="right">
-        <h1>${obj.name}</h1>
-        <div class="para">
-          <p>type : ${obj.type}</p>
-          <p>height : ${obj.height}</p>
-          <p>weight : ${obj.weight}</p>
+        <div>${obj.abilities
+          .map((item, index) => {
+            return `<p>ability${index + 1} : ${item}
+              </p>`;
+          })
+          .join("")}
         </div>
-        <div class="abilities">
-          <p>ability1 : ${obj.abilities[0]}</p>
-          <p>ability2 : ${obj.abilities[1]}</p>
+        <div>
+            ${obj.type
+              .map((item, index) => {
+                return `<p>type${index + 1} : ${item}`;
+              })
+              .join("")}
         </div>
-        <div class="stats">
-          <p>stat1 : ${obj.stats[0]}</p>
-          <p>stat2 : ${obj.stats[1]}</p>
-          <p>stat3 : ${obj.stats[2]}</p>
-          <p>stat4 : ${obj.stats[3]}</p>
-          <p>stat5 : ${obj.stats[4]}</p>
-          <p>stat6 : ${obj.stats[5]}</p>
+        <div>
+          ${obj.stats
+            .map((item, index) => {
+              return `<p>stat${index + 1} : ${item}`;
+            })
+            .join("")}
         </div>
-      </div>
+      </div> 
     </div>
-  </div>
   `;
 }
 
 function displayInitial() {
+  console.log(event.target.id);
+  const mainContainer = document.getElementById("allPokemons");
+  const headContainer = document.getElementById("heading");
+  const container = document.getElementById("subPokemon");
   const load = document.getElementById("load");
-  load.classList.remove("hide-btns");
-  offset = offsetElement.innerHTML;
-  // console.log(offset);
-  currentPage = current.innerHTML;
-  prev.disabled = true;
+  headContainer.style.display = "flex";
+  mainContainer.style.display = "grid";
+  load.style.display = "flex";
+  container.style.display = "none";
+  container.classList.remove(event.target.id);
+  offset = parseInt(offsetElement.innerHTML);
+  currentPage = parseInt(current.innerHTML);
+  if (offset === 0) prev.disabled = true;
+  else prev.disabled = false;
   next.disabled = false;
   getData(offset, currentPage);
+  console.log(typeof currentPage);
 }

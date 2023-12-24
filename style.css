@@ -1,13 +1,15 @@
 /* Importing Font */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
-/* Global Variables */
+/* Global Variables  */
 :root {
-  --font-family: "Poppins", sans-serif;
+  --main-font-family: "Poppins", sans-serif;
   --white: #fff;
   --black: #000;
-  --blue-shade: #03a9f4;
-  --linear-gradient: linear-gradient(
+  --main-border-color: #03a9f4;
+  --first-blue-shade: #f1e3f3;
+  --fifth-blue-shade: #3590f3;
+  --main-linear-gradient: linear-gradient(
     to right,
     #f1e3f3 0%,
     #c2bbf0 25%,
@@ -15,49 +17,95 @@
     #62bfed 75%,
     #3590f3 100%
   );
-  --grass-lg: linear-gradient(
-    to top,
-    #c0ff3e 0%,
-    #ccff00 25%,
-    #adff2f 50%,
-    #b3ee3a 75%,
-    #7cfc00 100%
+  --grass-linear-gradient: linear-gradient(to bottom, #74ad01, #4e6b01);
+  --poison-linear-gradient: linear-gradient(to bottom, #ffcccc, #cc9999);
+  --fire-linear-gradient: linear-gradient(to bottom, #ff7e5f, #ff4922);
+  --water-linear-gradient: linear-gradient(to bottom, #a0d8f7, #36a1ff);
+  --bug-linear-gradient: linear-gradient(to bottom, #8b4513, #008000);
+  --normal-linear-gradient: linear-gradient(to bottom right, #ffcc00, #ff6600);
+  --electric-linear-gradient: linear-gradient(
+    to bottom right,
+    #00ff00,
+    #0000ff,
+    #ff00ff
   );
-  --bug-lg: linear-gradient(
-    to top,
-    #f6e1d2 0%,
-    #f4ceb4 25%,
-    #e7be95 50%,
-    #dfaf7e 75%,
-    #c58d5f 100%
+  --ground-linear-gradient: linear-gradient(to bottom, #87ceeb, #74ad01);
+  --fairy-linear-gradient: linear-gradient(135deg, #fceabb, #f8b500);
+  --fighting-linear-gradient: linear-gradient(135deg, #87ceeb, #2f4f4f);
+  --psychic-linear-gradient: linear-gradient(
+    to bottom right,
+    #6c5b7b,
+    #c06c84,
+    #f67280
   );
-  --fire-lg: linear-gradient(
-    120deg,
-    #ff9a6e 0%,
-    #ffc57d 25%,
-    #ffdea0 50%,
-    #ffc284 75%,
-    #ff987d 100%
+  --rock-linear-gradient: linear-gradient(to bottom, #a6a6a6, #737373);
+  --ice-linear-gradient: linear-gradient(to bottom, #b3e0ff, #ffffff);
+  --dragon-linear-gradient: linear-gradient(45deg, #ff4500, #ff8c00, #008000);
+  --dark-linear-gradient: linear-gradient(to bottom, #333333, #000000);
+  --ghost-linear-gradient: linear-gradient(
+    to bottom right,
+    rgba(255, 255, 255, 0.8),
+    rgba(255, 255, 255, 0.2)
   );
-  --water-lg: linear-gradient(
-    to top,
-    #00ffdf 0%,
-    #00d8bd 25%,
-    #00bda5 50%,
-    #009f8b 75%,
-    #007667 100%
-  );
-  --normal-lg: linear-gradient(to top, #e3fdf5 0%, #ffe6fa 100%);
-  --poison-lg: linear-gradient(to top, #df89b5 0%, #bfd9fe 100%);
-  --electric-lg: linear-gradient(to top, #f83600 0%, #f9d423 100%);
-  --ground-lg: linear-gradient(315deg, #772f1a 0%, #f2a65a 74%);
-  --rock-lg: linear-gradient(to top, #c79081 0%, #dfa579 100%);
-  --ghost-lg: linear-gradient(to top, #b7b7b8 0%, #e2ebf0 100%);
-  --fairy-lg: linear-gradient(to top, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+  --steel-linear-gradient: linear-gradient(135deg, #444444, #999999);
 }
 
-/* Animations */
-@keyframes animate {
+/* types */
+.grass {
+  background: var(--grass-linear-gradient);
+}
+.poison {
+  background: var(--poison-linear-gradient);
+}
+.fire {
+  background: var(--fire-linear-gradient);
+}
+.water {
+  background: var(--water-linear-gradient);
+}
+.bug {
+  background: var(--bug-linear-gradient);
+}
+.normal {
+  background: var(--normal-linear-gradient);
+}
+.electric {
+  background: var(--electric-linear-gradient);
+}
+.ground {
+  background: var(--ground-linear-gradient);
+}
+.fairy {
+  background: var(--fairy-linear-gradient);
+}
+.fighting {
+  background: var(--fighting-linear-gradient);
+}
+.psychic {
+  background: var(--psychic-linear-gradient);
+}
+.rock {
+  background: var(--rock-linear-gradient);
+}
+.ice {
+  background: var(--ice-linear-gradient);
+}
+.dragon {
+  background: var(--dragon-linear-gradient);
+}
+.dark {
+  background: var(--dark-linear-gradient);
+  color: var(--white);
+}
+.ghost {
+  background: var(--ghost-linear-gradient);
+}
+.steel {
+  background: var(--steel-linear-gradient);
+}
+
+/* Animation */
+@keyframes waveform {
   0%,
   100% {
     clip-path: polygon(
@@ -92,251 +140,280 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: var(--font-family);
+  font-family: var(--main-font-family);
 }
-body {
-  background-image: var(--linear-gradient);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  min-height: 100vh;
-  /* border: 2px solid black; */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-/* Types */
-.rock,
-.steel {
-  background-image: var(--rock-lg);
-}
-.ghost,
-.psychic {
-  background-image: var(--ghost-lg);
-}
-.dragon,
-.electric {
-  background-image: var(--electric-lg);
-}
-.bug {
-  background-image: var(--bug-lg);
-}
-.poison {
-  background-image: var(--poison-lg);
-}
-.normal,
-.dark {
-  background-image: var(--normal-lg);
-}
-.fairy {
-  background-image: var(--fairy-lg);
-}
-.fighting,
-.fire {
-  background-image: var(--fire-lg);
-}
-.grass {
-  background-image: var(--grass-lg);
-}
-.water,
-.ice {
-  background-image: var(--water-lg);
-}
-.ground {
-  background-image: var(--ground-lg);
-}
-
-/* Pagination */
-#offset {
-  display: none;
-}
-.load-more-btn {
-  padding: 2rem;
-  display: flex;
-  gap: 2rem;
-  justify-content: center;
-  align-items: center;
-}
-.load-more-btn button {
+h1 {
+  font-size: 4rem;
   text-transform: capitalize;
-  font-size: 1.5rem;
-  padding: 0 1rem;
-  border: 2px solid var(--white);
-  background-color: transparent;
-  cursor: pointer;
-  background-image: var(--normal-lg);
-  outline: none;
-  letter-spacing: 1px;
 }
-#current {
-  cursor: auto;
+h2,
+p,
+button {
+  font-size: 3rem;
+  text-transform: capitalize;
 }
-.load-more-btn button:hover {
-  border: 2px solid var(--blue-shade);
-  background: var(--water-lg);
+html::-webkit-scrollbar {
+  width: 0.25rem;
 }
-#current:hover {
-  background-image: var(--normal-lg);
-  border: 2px solid var(--white);
+html::-webkit-scrollbar-thumb {
+  height: 5rem;
+  background-color: var(--first-blue-shade);
 }
-/* Main Container */
-.main-container {
+html::-webkit-scrollbar-track {
+  background-color: var(--fifth-blue-shade);
+}
+
+/* wholeContainer */
+.wholeContainer {
+  scroll-behavior: smooth;
   display: flex;
   flex-direction: column;
-  width: 100vw;
+  background-image: var(--main-linear-gradient);
+  padding: 2rem 0;
+  min-height: 100vh;
 }
 
 /* Heading Container */
-.heading-container {
+#heading {
   display: flex;
   justify-content: center;
-  gap: 1rem;
-  position: relative;
-  text-transform: uppercase;
-  font-size: 2rem;
-  width: 80vw;
-  height: 20vh;
-  align-self: center;
+  gap: 2rem;
+  margin-bottom: 1rem;
 }
-.content {
+#heading .content {
   position: relative;
-  width: 100%;
-  height: 100%;
-  left: 15rem;
 }
-.content h1 {
-  position: absolute;
+#heading .content h1:nth-child(1) {
   color: var(--white);
 }
-.content h1:nth-child(1) {
-  color: transparent;
-  -webkit-text-stroke: 2px var(--black);
-}
-.content h1:nth-child(2) {
-  color: var(--black);
-  animation: animate 2s ease-in-out infinite;
-}
-.content1 {
-  left: 4rem;
+#heading .content h1:nth-child(2) {
+  position: absolute;
+  top: 0.125rem;
+  animation: waveform 2.5s ease-in-out infinite;
 }
 
-/* Info-Container */
-.info-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-  padding: 1rem;
-}
+/* Info Container */
 #allPokemons {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   justify-content: center;
   align-items: center;
-  text-align: center;
-  text-transform: capitalize;
-  gap: 1rem;
+  gap: 2rem;
   padding: 1rem;
 }
-img {
-  width: 200px;
-  height: 200px;
+.specific img {
+  width: 16rem;
+  height: 16rem;
 }
 .specific {
-  border: 2px solid var(--blue-shade);
-  width: 22.5%;
-  height: 100%;
-  padding: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 1rem;
-  border-radius: 5px;
-  min-height: 50vh;
-  font-size: 1.25rem;
-}
-.specific h1 {
-  padding: 0.75rem;
-  width: 100%;
-  height: 80px;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
-}
-.specific p {
-  font-weight: bold;
+  padding: 1rem;
+  border-radius: 15px;
 }
 .specific button {
-  border: 2px solid var(--blue-shade);
-  text-transform: capitalize;
-  padding: 0.5rem;
-  font-weight: bold;
-  font-size: 1.25rem;
+  border: 2px solid var(--black);
   cursor: pointer;
+  padding: 0 1rem;
+  border-radius: 10px;
 }
 .specific button:hover {
-  background-image: var(--linear-gradient);
   border: 2px solid var(--white);
+  background: var(--main-linear-gradient);
 }
 
-/* Individual Info Contaiiner */
-/* .main-div {
-  border: 2px solid var(--black);
-  display: flex;
-  flex-direction: row-reverse;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
-} */
-.hide-btns {
-  display: none;
-}
-.close {
-  position: relative;
-  border-radius: 50%;
-  border: 2px solid var(--blue-shade);
-  padding: 1rem;
-  font-size: 1rem;
-  font-weight: bold;
-  position: relative;
-  left: 28rem;
-  z-index: 1;
-}
-.close:hover {
-  background-image: var(--linear-gradient);
-  border: 2px solid var(--white);
-}
-.main-info {
-  display: flex;
-  width: 100%;
-  padding: 1rem 4.5rem 1rem 1rem;
-  justify-content: center;
-  align-items: center;
-  gap: 2rem;
-  position: relative;
-  bottom: 4.5rem;
-}
-.right {
+/* subPokemon */
+.individualPokemon {
   display: flex;
   flex-direction: column;
-  padding: 1rem;
-  gap: 2rem;
-  font-size: 1.25rem;
-}
-.abilities {
-  display: flex;
-  gap: 1rem;
-}
-.stats {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
   justify-content: center;
   align-items: center;
-}
-.para {
-  display: flex;
+  margin: 0 1rem;
   gap: 1rem;
+  border-radius: 15px;
+}
+.individualPokemon button {
+  outline: none;
+  border: none;
+  border-radius: 50%;
+  padding: 0 1rem;
+  position: relative;
+  left: 34rem;
+  top: 1rem;
+}
+.individualPokemon button:hover {
+  background: var(--ice-linear-gradient);
+}
+.individualPokemon img {
+  height: 120px;
+  width: 120px;
+}
+.info {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+
+/* pagination Buttons */
+#offset {
+  display: none;
+}
+#load {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  padding: 1rem;
+}
+.loadBtn {
+  border: 2px solid var(--black);
+  cursor: pointer;
+  padding: 0 1rem;
+  border-radius: 10px;
+  outline: none;
+  background: var(--poison-linear-gradient);
+}
+#current {
+  padding: 0 2rem;
+  background: transparent;
+  cursor: none;
+  outline: none;
+  border: none;
+}
+.loadBtn:hover {
+  border: 2px solid var(--white);
+  background: var(--ice-linear-gradient);
+}
+
+/* Responsiveness */
+@media screen and (max-width: 1200px) {
+  #allPokemons {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .individualPokemon button {
+    left: 24rem;
+  }
+  h2,
+  p,
+  button {
+    font-size: 2.25rem;
+  }
+}
+@media screen and (max-width: 900px) {
+  .individualPokemon button {
+    left: 22rem;
+  }
+  h2,
+  p,
+  button {
+    font-size: 2rem;
+  }
+  .specific img {
+    width: 13rem;
+    height: 13rem;
+  }
+}
+@media screen and (max-width: 800px) {
+  .individualPokemon button {
+    left: 19rem;
+  }
+  button,
+  h2,
+  p {
+    font-size: 1.75rem;
+  }
+}
+@media screen and (max-width: 700px) {
+  .individualPokemon button {
+    left: 16rem;
+  }
+  h1 {
+    font-size: 3rem;
+  }
+  button,
+  h2,
+  p {
+    font-size: 1.5rem;
+  }
+}
+@media screen and (max-width: 650px) {
+  #allPokemons {
+    grid-template-columns: repeat(1, auto);
+  }
+  .specific img {
+    width: 10rem;
+    height: 10rem;
+  }
+}
+@media screen and (max-width: 600px) {
+  .individualPokemon button {
+    left: 14rem;
+  }
+  button,
+  h2,
+  p {
+    font-size: 1.25rem;
+  }
+}
+@media screen and (max-width: 550px) {
+  .individualPokemon button {
+    left: 10rem;
+  }
+  button,
+  h2,
+  p {
+    font-size: 1rem;
+    font-weight: bold;
+  }
+}
+@media screen and (max-width: 550px) {
+  h1 {
+    font-size: 2rem;
+  }
+}
+@media screen and (max-width: 450px) {
+  .individualPokemon button {
+    left: 9rem;
+  }
+  button,
+  h2,
+  p {
+    font-size: 0.8rem;
+  }
+}
+@media screen and (max-width: 400px) {
+  #heading .content1 {
+    display: none;
+  }
+  .individualPokemon button {
+    left: 7rem;
+  }
+  button,
+  h2,
+  p {
+    font-size: 0.75rem;
+  }
+}
+@media screen and (max-width: 350px) {
+  .individualPokemon button {
+    left: 6rem;
+  }
+  button,
+  h2,
+  p {
+    font-size: 0.675rem;
+  }
+}
+@media screen and (max-width: 300px) {
+  .individualPokemon button {
+    left: 5rem;
+  }
+}
+@media screen and (max-width: 250px) {
+  .individualPokemon button {
+    left: 3.25rem;
+  }
 }

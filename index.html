@@ -7,8 +7,8 @@
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
-    <div class="main-container">
-      <div class="heading-container">
+    <div class="wholeContainer">
+      <div id="heading">
         <div class="content">
           <h1>pokemon</h1>
           <h1>pokemon</h1>
@@ -18,16 +18,17 @@
           <h1>kingdom</h1>
         </div>
       </div>
-      <div class="info-container" id="info">
+      <div id="info">
         <div id="allPokemons"></div>
-        <div class="load-more-btn" id="load">
-          <button id="first">start</button>
-          <button id="prev">previous</button>
-          <button id="current"></button>
-          <button id="offset"></button>
-          <button id="next">next</button>
-          <button id="last">end</button>
-        </div>
+        <div id="subPokemon"></div>
+      </div>
+      <div id="load">
+        <button id="first" class="loadBtn">start</button>
+        <button id="prev" class="loadBtn">previous</button>
+        <button id="current"></button>
+        <button id="offset"></button>
+        <button id="next" class="loadBtn">next</button>
+        <button id="last" class="loadBtn">end</button>
       </div>
     </div>
     <script src="./App.js"></script>
